@@ -10,16 +10,24 @@ photo_uploader = PhotoUploader(bot.api, generate_attachment_strings=True)
 doc_uploader = DocUploader(bot.api, generate_attachment_strings=True)
 audio_uploader = AudioUploader(bot.api, generate_attachment_strings=True)
 
-
+#PNG from bytes#
 @bot.on.message_handler(text="photo_from_bytes", lower=True)
 async def photo_from_bytes(ans: Message):
     image = Image.new("RGB", (320, 320), (0, 0, 0))
     fp = BytesIO()
-    image.save(fp, "RGB")
+    image.save(fp, "PNG")
     setattr(fp, "name", "image.png")
     photo = await photo_uploader.upload_message_photo(fp)
     await ans(attachment=photo)
-
+#Webp from bytes#
+@bot.on.message_handler(text="photo_from_bytes", lower=True)
+async def photo_from_bytes(ans: Message):
+    image = Image.new("RGB", (320, 320), (0, 0, 0))
+    fp = BytesIO()
+    image.save(fp, "webp")
+    setattr(fp, "name", "image.webp")
+    photo = await photo_uploader.upload_message_photo(fp)
+    await ans(attachment=photo
 
 @bot.on.message_handler(text="doc_from_file", lower=True)
 async def photo_from_bytes(ans: Message):
